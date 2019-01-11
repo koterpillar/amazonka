@@ -300,12 +300,12 @@ latest :: Text
 latest = "http://169.254.169.254/latest/"
 
 -- | Test whether the underlying host is running on EC2 by
--- making an HTTP request to @http://instance-data/latest@.
+-- making an HTTP request to @http://169.254.169.254/latest@.
 isEC2 :: MonadIO m => Manager -> m Bool
 isEC2 m = liftIO (req `catch` err)
   where
     req = do
-        !_ <- request m "http://instance-data/latest"
+        !_ <- request m "http://169.254.169.254/latest"
         return True
 
     err :: HttpException -> IO Bool

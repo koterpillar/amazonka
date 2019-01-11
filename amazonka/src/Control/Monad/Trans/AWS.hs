@@ -509,7 +509,7 @@ Not all signing algorithms support this.
 
 {- $metadata
 Metadata can be retrieved from the underlying host assuming that you're running
-the code on an EC2 instance or have a compatible @instance-data@ endpoint available.
+the code on an EC2 instance or have a compatible metadata endpoint available.
 -}
 
 {- $async

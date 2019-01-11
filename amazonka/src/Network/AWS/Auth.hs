@@ -198,7 +198,7 @@ data Credentials
       -- an optional session token, and an optional region, respectively.
 
     | FromProfile Text
-      -- ^ An IAM Profile name to lookup from the local EC2 instance-data.
+      -- ^ An IAM Profile name to lookup from the local EC2 instance data.
       -- Environment variables to lookup for the access key, secret key and
       -- optional session token.
 
@@ -224,11 +224,6 @@ data Credentials
       --
       -- * Retrieve the first available IAM profile and read
       -- the 'Region' from the instance identity document, if running on EC2.
-      --
-      -- An attempt is made to resolve <http://instance-data> rather than directly
-      -- retrieving <http://169.254.169.254> for IAM profile information.
-      -- This assists in ensuring the DNS lookup terminates promptly if not
-      -- running on EC2.
       deriving (Eq)
 
 instance ToLog Credentials where
@@ -471,7 +466,7 @@ fromFilePath n f = do
 
     blank x = Text.null x || Text.all isSpace x
 
--- | Retrieve the default IAM Profile from the local EC2 instance-data.
+-- | Retrieve the default IAM Profile from the local EC2 instance data.
 --
 -- The default IAM profile is determined by Amazon as the first profile found
 -- in the response from:
@@ -488,7 +483,7 @@ fromProfile m = do
         _           -> throwM $
             InvalidIAMError "Unable to get default IAM Profile from EC2 metadata"
 
--- | Lookup a specific IAM Profile by name from the local EC2 instance-data.
+-- | Lookup a specific IAM Profile by name from the local EC2 instance data.
 --
 -- Additionally starts a refresh thread for the given authentication environment.
 --
